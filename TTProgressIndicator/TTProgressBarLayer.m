@@ -8,7 +8,7 @@
 
 #import "TTProgressBarLayer.h"
 @interface TTProgressBarLayer()
-@property (nonatomic) CGFloat startAngle;
+
 @end
 @implementation TTProgressBarLayer
 @synthesize backgroundColor, strokeWidth, strokeColor;
@@ -84,10 +84,10 @@
     if (interval < 0) {
         interval = -interval;
     }
-    if (interval > 1.3) {
-        interval = 1.3;
+    if (interval > 0.5) {
+        interval = 0.5;
     }
-    animation.duration = interval;
+    animation.duration = 0.8;
     NSLog(@"FROM LAYER: Duration: %f",animation.duration);
     return animation;
 }

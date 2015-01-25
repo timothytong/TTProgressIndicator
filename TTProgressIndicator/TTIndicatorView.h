@@ -18,4 +18,5 @@
 -(id)initWithFrame:(CGRect)frame strokeWidth:(CGFloat)barWidth;
 -(void)setBarColor:(UIColor *)color;
 -(void)setCenterColor:(UIColor *)color withAnimationTime:(double)time;
+-(void)reset;
 @end

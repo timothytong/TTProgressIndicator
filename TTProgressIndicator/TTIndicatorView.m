@@ -15,6 +15,7 @@
 @property (nonatomic) CGFloat currentProgress;
 @property (nonatomic) CGColorRef centerCircleColor;
 @property (strong, nonatomic) NSTimer *timer;
+
 @end
 @implementation TTIndicatorView
 int _tempCurProgress = 0;
@@ -78,7 +79,13 @@ int _increment = 0;
     }
     else{
         _tempCurProgress += _increment;
-        self.progressLabel.text = [NSString stringWithFormat:@"%d%%", _tempCurProgress];
+        if (_tempCurProgress <= 0 || _tempCurProgress >= 100) {
+            [self.timer invalidate];
+        }
+        else{
+            self.progressLabel.text = [NSString stringWithFormat:@"%d%%", _tempCurProgress];    
+        }
+        
     }
 }
 -(void)resetCountProperties{
@@ -89,6 +96,8 @@ int _increment = 0;
     _increment = 0;
 }
 -(void)updateProgress:(CGFloat)newProgress{
+    [self.timer invalidate];
+    
     NSLog(@"==========UPDATE: FROM %.0f to %.0f==========",self.currentProgress*100, newProgress*100);
     [self resetCountProperties];
     
@@ -109,11 +118,13 @@ int _increment = 0;
         NSLog(@"===INC: %d",_increment);
         double pause = duration/_numChanges;
         NSLog(@"===pause: %.4f",pause);
+        
         self.timer = [NSTimer scheduledTimerWithTimeInterval:pause
                                                       target:self
                                                     selector:@selector(changeText)
                                                     userInfo:nil
                                                      repeats:YES];
+         
     }
     
     CGFloat newEndAngle = 2 * M_PI * newProgress - M_PI_2;
@@ -157,18 +168,21 @@ int _increment = 0;
     if (interval < 0) {
         interval = -interval;
     }
-    NSLog(@"Start: %f, End: %f, interval: %f", startAngle,endAngle,interval);
-    if (interval > 1.3) {
-        interval = 1.3;
+    NSLog(@"Start: %f, End: %f, interval: %f", startAngle, endAngle, interval);
+    if (interval > 0.5) {
+        interval = 0.5;
     }
     NSLog(@"Calculated duration: %f", interval);
-    return interval;
+    return 0.8;
     
 }
 
 
-//-(void)resetProgress{
-//    self.currentProgress = 0;
-//}
+-(void)reset{
+    self.currentProgress = 0;
+    self.progressBar.endAngle = -M_PI_2;
+    self.progressBar.startAngle = -M_PI_2;
+    self.progressLabel.text = @"0%";
+}
 
 @end

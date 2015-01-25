@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TTProgressIndicator/TTIndicatorView.m"
-            timestampString = "443837278.960433"
+            timestampString = "443845500.974153"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "-updateProgress:"
             landmarkType = "5">
          </BreakpointContent>

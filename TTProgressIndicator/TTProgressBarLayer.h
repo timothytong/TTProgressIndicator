@@ -12,7 +12,7 @@
 
 @property (nonatomic) CGFloat endAngle;
 @property (nonatomic) CGFloat currentAngle;
-
+@property (nonatomic) CGFloat startAngle;
 @property (nonatomic) CGColorRef strokeColor;
 @property (nonatomic) CGFloat strokeWidth;
 @property (nonatomic, readwrite) BOOL particlesEffect;
