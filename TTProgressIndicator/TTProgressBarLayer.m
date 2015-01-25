@@ -7,19 +7,20 @@
 //
 
 #import "TTProgressBarLayer.h"
-
+@interface TTProgressBarLayer()
+@property (nonatomic) CGFloat startAngle;
+@end
 @implementation TTProgressBarLayer
 @synthesize backgroundColor, strokeWidth, strokeColor;
-@dynamic startAngle, endAngle;
+@dynamic startAngle,endAngle;
 
 -(id)init{
     self = [super init];
     if (self) {
-        NSLog(@"INIT");
         self.strokeColor = [UIColor redColor].CGColor;
         self.strokeWidth = 1.0;
-        self.startAngle = 0;
-        self.endAngle = M_1_PI;
+        self.startAngle = -M_PI_2;
+        self.endAngle = -M_PI_2;
         [self setNeedsDisplay];
     }
     return self;
@@ -44,6 +45,7 @@
 
 +(BOOL)needsDisplayForKey:(NSString *)key{
     if ([key isEqualToString:@"startAngle"]||[key isEqualToString:@"endAngle"]) {
+                NSLog(@"Returning YES for %@", key);
         return YES;
     }
     return [super needsDisplayForKey:key];
@@ -67,7 +69,8 @@
 }
 
 -(id<CAAction>)actionForKey:(NSString *)key{
-    if ([key isEqualToString:@"startAngle"] ||[key isEqualToString:@"endAngle"]) {
+    if ([key isEqualToString:@"startAngle"]||[key isEqualToString:@"endAngle"]) {
+        NSLog(@"Returning CAAction for %@", key);
         return [self generateAnimationForKey:key];
     }
     return [super actionForKey:key];
@@ -77,12 +80,15 @@
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:key];
     animation.fromValue = [[self presentationLayer] valueForKey:key];
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    NSTimeInterval interval = abs((self.startAngle - self.endAngle)*5);
+    NSTimeInterval interval = (self.startAngle - self.endAngle)*5.0f;
+    if (interval < 0) {
+        interval = -interval;
+    }
     if (interval > 1.3) {
         interval = 1.3;
     }
     animation.duration = interval;
-    NSLog(@"Duration: %f",animation.duration);
+    NSLog(@"FROM LAYER: Duration: %f",animation.duration);
     return animation;
 }
 @end

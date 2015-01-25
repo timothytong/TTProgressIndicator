@@ -18,12 +18,28 @@
     [super viewDidLoad];
     self.indicator = [[TTIndicatorView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 120, self.view.frame.size.height/2 - 120, 240, 240) strokeWidth:5];
     [self.view addSubview:self.indicator];
-    [self.indicator updateProgress:0];
+//    [self.indicator updateProgress:0];
     // Do any additional setup after loading the view, typically from a nib.
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [NSThread sleepForTimeInterval:2.0f];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.indicator updateProgress:0.4];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                [NSThread sleepForTimeInterval:2.0f];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self.indicator updateProgress:0];
+                });
+            });
+        });
+    });
+/*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [NSThread sleepForTimeInterval:2.0f];
@@ -55,20 +71,20 @@
                 
                                             [self.indicator updateProgress:1];
                                             [NSThread sleepForTimeInterval:2.0f];
-                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                
-                                                [self.indicator updateProgress:0.34];
-                                                [NSThread sleepForTimeInterval:2.0f];
-                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                    
-                                                    [self.indicator updateProgress:1];
-                                                    [NSThread sleepForTimeInterval:2.0f];
-                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                        
-                                                        [self.indicator updateProgress:0];
-                                                    });
-                                                });
-                                            });
+//                                            dispatch_async(dispatch_get_main_queue(), ^{
+//                                                
+//                                                [self.indicator updateProgress:0.34];
+//                                                [NSThread sleepForTimeInterval:2.0f];
+//                                                dispatch_async(dispatch_get_main_queue(), ^{
+//                                                    
+//                                                    [self.indicator updateProgress:1];
+//                                                    [NSThread sleepForTimeInterval:2.0f];
+//                                                    dispatch_async(dispatch_get_main_queue(), ^{
+//                                                        
+//                                                        [self.indicator updateProgress:0];
+//                                                    });
+//                                                });
+//                                            });
                                         });
                                     });
                                 });
@@ -79,6 +95,7 @@
             });
         });
     });
+ */
 /*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         

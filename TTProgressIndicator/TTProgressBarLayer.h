@@ -9,7 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 @interface TTProgressBarLayer : CALayer
-@property (nonatomic) CGFloat startAngle;
+
 @property (nonatomic) CGFloat endAngle;
 @property (nonatomic) CGFloat currentAngle;
 

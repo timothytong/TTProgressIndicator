@@ -63,7 +63,9 @@ int _increment = 0;
 }
 -(void)changeText{
     _count++;
+    NSLog(@"    ===COUNT: %d",_count);
     if (_count == _numChanges) {
+        NSLog(@"Invalidating timer");
         [self.timer invalidate];
         if (self.currentProgress >= 1) {
             self.currentProgress = 1;
@@ -76,7 +78,6 @@ int _increment = 0;
     }
     else{
         _tempCurProgress += _increment;
-        //            NSLog(@"changeTEXT to %d", _tempCurProgress);
         self.progressLabel.text = [NSString stringWithFormat:@"%d%%", _tempCurProgress];
     }
 }
@@ -88,7 +89,7 @@ int _increment = 0;
     _increment = 0;
 }
 -(void)updateProgress:(CGFloat)newProgress{
-    NSLog(@"==========UPDATE==========");
+    NSLog(@"==========UPDATE: FROM %.0f to %.0f==========",self.currentProgress*100, newProgress*100);
     [self resetCountProperties];
     
     int diff = 100 * newProgress - 100 * self.currentProgress;
@@ -96,17 +97,17 @@ int _increment = 0;
     NSLog(@"===DIFF: %d",diff);
     
     if (diff != 0) {
-        NSTimeInterval duration = [self calculateAnimDurationWithNewProgress:newProgress];
-        if (abs(diff) <= 10) {
+        double duration = [self calculateAnimDurationWithNewProgress:newProgress];
+        if (abs(diff) <= 20) {
             _numChanges = diff;
         }
         else{
-            _numChanges = 10;
+            _numChanges = 20;
         }
         NSLog(@"===numchanges: %d",_numChanges);
         _increment = diff / _numChanges;
         NSLog(@"===INC: %d",_increment);
-        NSTimeInterval pause = duration/_numChanges;
+        double pause = duration/_numChanges;
         NSLog(@"===pause: %.4f",pause);
         self.timer = [NSTimer scheduledTimerWithTimeInterval:pause
                                                       target:self
@@ -115,8 +116,8 @@ int _increment = 0;
                                                      repeats:YES];
     }
     
-    CGFloat newEndAngle = 2 * M_PI * newProgress;
-    self.progressBar.startAngle = 0;
+    CGFloat newEndAngle = 2 * M_PI * newProgress - M_PI_2;
+//    self.progressBar.startAngle = -M_PI_2;
     self.progressBar.endAngle = newEndAngle;
     //    NSLog(@"New end angle: 2 * %f * %f = %f", M_1_PI, newProgress, newEndAngle);
     
@@ -149,17 +150,25 @@ int _increment = 0;
     }
 }
 
-- (double)calculateAnimDurationWithNewProgress:(CGFloat)progress{
+- (NSTimeInterval)calculateAnimDurationWithNewProgress:(CGFloat)progress{
     CGFloat startAngle = self.progressBar.endAngle;
-    CGFloat endAngle = progress * 2 * M_PI;
-    double interval = abs((startAngle - endAngle) * 5.0f);
+    CGFloat endAngle = progress * 2 * M_PI - M_PI_2;
+    NSTimeInterval interval = (startAngle - endAngle) * 3.0f;
+    if (interval < 0) {
+        interval = -interval;
+    }
     NSLog(@"Start: %f, End: %f, interval: %f", startAngle,endAngle,interval);
     if (interval > 1.3) {
         interval = 1.3;
     }
     NSLog(@"Calculated duration: %f", interval);
     return interval;
+    
 }
 
+
+//-(void)resetProgress{
+//    self.currentProgress = 0;
+//}
 
 @end
