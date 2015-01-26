@@ -75,7 +75,7 @@
         [self.indicator updateProgress:1];
     }];
     [self delayWithSeconds:18 handler:^{
-        [self.indicator updateProgress:0.37];
+        [self.indicator updateProgress:600];
     }];
 /*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
