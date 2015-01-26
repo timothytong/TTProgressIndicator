@@ -97,7 +97,9 @@ int _increment = 0;
 }
 -(void)updateProgress:(CGFloat)newProgress{
     [self.timer invalidate];
-    
+    if (newProgress > 1) {
+        newProgress = 1;
+    }
     NSLog(@"==========UPDATE: FROM %.0f to %.0f==========",self.currentProgress*100, newProgress*100);
     [self resetCountProperties];
     
@@ -106,7 +108,7 @@ int _increment = 0;
     NSLog(@"===DIFF: %d",diff);
     
     if (diff != 0) {
-        double duration = [self calculateAnimDurationWithNewProgress:newProgress];
+        double duration = 0.8;
         if (abs(diff) <= 20) {
             _numChanges = diff;
         }
@@ -160,7 +162,7 @@ int _increment = 0;
         self.centerCircle.alpha = 0;
     }
 }
-
+/*
 - (NSTimeInterval)calculateAnimDurationWithNewProgress:(CGFloat)progress{
     CGFloat startAngle = self.progressBar.endAngle;
     CGFloat endAngle = progress * 2 * M_PI - M_PI_2;
@@ -176,7 +178,7 @@ int _increment = 0;
     return 0.8;
     
 }
-
+*/
 
 -(void)reset{
     self.currentProgress = 0;

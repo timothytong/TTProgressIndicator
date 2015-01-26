@@ -11,7 +11,7 @@
 
 @end
 @implementation TTProgressBarLayer
-@synthesize backgroundColor, strokeWidth, strokeColor;
+@synthesize strokeWidth, strokeColor;
 @dynamic startAngle,endAngle;
 
 -(id)init{
@@ -80,6 +80,7 @@
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:key];
     animation.fromValue = [[self presentationLayer] valueForKey:key];
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    /*
     NSTimeInterval interval = (self.startAngle - self.endAngle)*5.0f;
     if (interval < 0) {
         interval = -interval;
@@ -87,6 +88,7 @@
     if (interval > 0.5) {
         interval = 0.5;
     }
+     */
     animation.duration = 0.8;
     NSLog(@"FROM LAYER: Duration: %f",animation.duration);
     return animation;
