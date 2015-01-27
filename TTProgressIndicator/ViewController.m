@@ -19,7 +19,7 @@
     self.indicator = [[TTIndicatorView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 120, self.view.frame.size.height/2 - 120, 240, 240) strokeWidth:5];
     [self.view addSubview:self.indicator];
     [self.indicator reset];
-    self.view.backgroundColor = [UIColor colorWithRed:140.0/255.0 green:140.0/255.0 blue:140.0/255.0 alpha:1];
+//    self.view.backgroundColor = [UIColor colorWithRed:140.0/255.0 green:140.0/255.0 blue:140.0/255.0 alpha:1];
     // Do any additional setup after loading the view, typically from a nib.
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -34,6 +34,20 @@
     
     [self delayWithSeconds:2 handler:^{
         [self.indicator updateProgress:1 withAnimationDuration:4];
+
+    }];
+    
+    [self delayWithSeconds:4 handler:^{
+        self.indicator.centerCircleColor = [UIColor greenColor];
+        self.indicator.labelColor = [UIColor blackColor];
+        self.indicator.labelFont = [UIFont fontWithName:@"HelveticaNeue-Thin" size:40];
+        self.indicator.alignment = NSTextAlignmentLeft;
+    }];
+    
+    [self delayWithSeconds:6 handler:^{
+        NSLog(@"align: %ld, labelColor: %@", self.indicator.alignment, self.indicator.labelColor);
+        
+        
     }];
 }
 - (void)didReceiveMemoryWarning {

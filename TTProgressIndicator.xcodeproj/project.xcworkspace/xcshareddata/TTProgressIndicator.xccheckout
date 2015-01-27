@@ -10,22 +10,26 @@
 	<string>TTProgressIndicator</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>17FA2467792957C8A12D2BD1FA381C1D07F8796A</key>
+		<string>github.com:timothytong/TTProgressIndicator.git</string>
 		<key>2FCEC0448A437BAF099EC739EE692CD67CD96377</key>
 		<string>https://github.com/timothytong/DMCalc.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>TTProgressIndicator/TTProgressIndicator.xcodeproj</string>
+	<string>TTProgressIndicator.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>17FA2467792957C8A12D2BD1FA381C1D07F8796A</key>
+		<string>../..</string>
 		<key>2FCEC0448A437BAF099EC739EE692CD67CD96377</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/timothytong/DMCalc.git</string>
+	<string>github.com:timothytong/TTProgressIndicator.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2FCEC0448A437BAF099EC739EE692CD67CD96377</string>
+	<string>17FA2467792957C8A12D2BD1FA381C1D07F8796A</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -34,7 +38,15 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>2FCEC0448A437BAF099EC739EE692CD67CD96377</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Xcode%20Projects</string>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>17FA2467792957C8A12D2BD1FA381C1D07F8796A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TTProgressIndicator</string>
 		</dict>
 	</array>
 </dict>

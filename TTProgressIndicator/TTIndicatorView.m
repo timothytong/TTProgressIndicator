@@ -13,7 +13,6 @@
 @implementation TTIndicatorView{
     @private
     TTProgressBarLayer *_progressBar;
-    CGColorRef _centerCircleColor; //not used yet
     CGFloat _currentProgress;
     NSTimer *_timer;
     UIView *_centerCircle;
@@ -24,10 +23,12 @@
     int _increment;
     UILabel *_progressLabel;
 }
+@dynamic showProgressValues;
 -(id)initWithFrame:(CGRect)frame strokeWidth:(CGFloat)barWidth{
     self = [super initWithFrame:frame];
     if (self) {
         _currentProgress = 0;
+        self.alignment = NSTextAlignmentCenter;
         CGPoint circleCenter = CGPointMake(frame.size.width/2, frame.size.width/2);
         CGFloat halfWidth = (frame.size.width - 2 * barWidth)/2;
         CGRect frame = CGRectMake(circleCenter.x - halfWidth, circleCenter.y - halfWidth, 2*halfWidth, 2*halfWidth);
@@ -44,10 +45,9 @@
         [self.layer addSublayer:_containerLayer];
         CAShapeLayer *mask = [CAShapeLayer layer];
         mask.path=[UIBezierPath bezierPathWithOvalInRect:CGRectMake(0,0, frame.size.width, frame.size.height)].CGPath;
-        
+
         _centerCircle.layer.backgroundColor = [UIColor blackColor].CGColor;
         _centerCircle.layer.mask = mask;
-        
         _progressLabel = [[UILabel alloc]initWithFrame:CGRectMake(_centerCircle.frame.size.width * 0.1, _centerCircle.frame.size.height * 0.1, _centerCircle.frame.size.width * 0.8, _centerCircle.frame.size.height * 0.8)];
         _progressLabel.numberOfLines = 1;
         _progressLabel.adjustsFontSizeToFitWidth = YES;
@@ -149,6 +149,25 @@
     [self bringSubviewToFront:_centerCircle];
 }
 
+
+
+-(void)reset{
+    _currentProgress = 0;
+    _progressBar.endAngle = -M_PI_2;
+    _progressBar.startAngle = -M_PI_2;
+    _progressLabel.text = @"0%";
+}
+#pragma mark Setters
+-(void)setLabelColor:(UIColor *)color{
+    _progressLabel.textColor = color;
+}
+-(void)setLabelAlignment:(NSTextAlignment)alignment{
+    self.alignment = alignment;
+    _progressLabel.textAlignment = alignment;
+}
+-(void)setLabelFont:(UIFont *)font{
+    _progressLabel.font = font;
+}
 -(void)setShowProgressValues:(BOOL)showProgressValues{
     if (showProgressValues) {
         _centerCircle.alpha = 1;
@@ -157,22 +176,9 @@
         _centerCircle.alpha = 0;
     }
 }
-
--(void)reset{
-    _currentProgress = 0;
-    _progressBar.endAngle = -M_PI_2;
-    _progressBar.startAngle = -M_PI_2;
-    _progressLabel.text = @"0%";
+-(void)setCenterCircleColor:(UIColor *)centerCircleColor{
+    _centerCircle.layer.backgroundColor = centerCircleColor.CGColor;
 }
 
--(void)setLabelColor:(UIColor *)color{
-    _progressLabel.textColor = color;
-}
--(void)setLabelAlignment:(NSTextAlignment)alignment{
-    _progressLabel.textAlignment = alignment;
-}
--(void)setLabelFont:(UIFont *)font{
-    _progressLabel.font = font;
-}
 
 @end
