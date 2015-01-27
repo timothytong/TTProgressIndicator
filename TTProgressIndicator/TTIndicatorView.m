@@ -22,6 +22,7 @@
     int _count;
     int _numChanges;
     int _increment;
+    UILabel *_progressLabel;
 }
 -(id)initWithFrame:(CGRect)frame strokeWidth:(CGFloat)barWidth{
     self = [super initWithFrame:frame];
@@ -47,16 +48,16 @@
         _centerCircle.layer.backgroundColor = [UIColor blackColor].CGColor;
         _centerCircle.layer.mask = mask;
         
-        self.progressLabel = [[UILabel alloc]initWithFrame:CGRectMake(_centerCircle.frame.size.width * 0.1, _centerCircle.frame.size.height * 0.1, _centerCircle.frame.size.width * 0.8, _centerCircle.frame.size.height * 0.8)];
-        self.progressLabel.numberOfLines = 1;
-        self.progressLabel.adjustsFontSizeToFitWidth = YES;
-        self.progressLabel.font = [UIFont fontWithName:@"Avenir Next Condensed" size:80];
-        self.progressLabel.minimumScaleFactor = 0.2;
-        self.progressLabel.text = @"0%";
-        self.progressLabel.textColor = [UIColor whiteColor];
-        self.progressLabel.textAlignment = NSTextAlignmentCenter;
+        _progressLabel = [[UILabel alloc]initWithFrame:CGRectMake(_centerCircle.frame.size.width * 0.1, _centerCircle.frame.size.height * 0.1, _centerCircle.frame.size.width * 0.8, _centerCircle.frame.size.height * 0.8)];
+        _progressLabel.numberOfLines = 1;
+        _progressLabel.adjustsFontSizeToFitWidth = YES;
+        _progressLabel.font = [UIFont fontWithName:@"Avenir Next Condensed" size:80];
+        _progressLabel.minimumScaleFactor = 0.2;
+        _progressLabel.text = @"0%";
+        _progressLabel.textColor = [UIColor whiteColor];
+        _progressLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_centerCircle];
-        [_centerCircle addSubview:self.progressLabel];
+        [_centerCircle addSubview:_progressLabel];
         
     }
     return self;
@@ -69,10 +70,10 @@
         [_timer invalidate];
         if (_currentProgress >= 1) {
             _currentProgress = 1;
-            self.progressLabel.text = @"100%";
+            _progressLabel.text = @"100%";
         }
         else{
-            self.progressLabel.text = [NSString stringWithFormat:@"%.0f%%", _currentProgress*100];
+            _progressLabel.text = [NSString stringWithFormat:@"%.0f%%", _currentProgress*100];
         }
         
     }
@@ -82,7 +83,7 @@
             [_timer invalidate];
         }
         else{
-            self.progressLabel.text = [NSString stringWithFormat:@"%d%%", _tempCurProgress];    
+            _progressLabel.text = [NSString stringWithFormat:@"%d%%", _tempCurProgress];    
         }
         
     }
@@ -94,7 +95,7 @@
     _tempCurProgress = _currentProgress * 100;
     _increment = 0;
 }
--(void)updateProgress:(CGFloat)newProgress animationDuration:(CFTimeInterval)duration{
+-(void)updateProgress:(CGFloat)newProgress withAnimationDuration:(CFTimeInterval)duration{
     [_timer invalidate];
     _progressBar.dur = duration;
     if (newProgress > 1) {
@@ -129,18 +130,13 @@
     }
     
     CGFloat newEndAngle = 2 * M_PI * newProgress - M_PI_2;
-//    _progressBar.startAngle = -M_PI_2;
     _progressBar.endAngle = newEndAngle;
-    //    NSLog(@"New end angle: 2 * %f * %f = %f", M_1_PI, newProgress, newEndAngle);
-    
-    
-    
 }
 
 -(void)setBarColor:(UIColor *)color{
     [_progressBar setBarColor:color.CGColor];
 }
--(void)setCenterColor:(UIColor *)color withAnimationTime:(double)time{
+-(void)setCenterColor:(UIColor *)color withAnimationTime:(CFTimeInterval)time{
     NSLog(@"setting center color");
     [UIView animateWithDuration:time delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         _centerCircle.layer.backgroundColor = color.CGColor;
@@ -161,29 +157,22 @@
         _centerCircle.alpha = 0;
     }
 }
-/*
-- (NSTimeInterval)calculateAnimDurationWithNewProgress:(CGFloat)progress{
-    CGFloat startAngle = _progressBar.endAngle;
-    CGFloat endAngle = progress * 2 * M_PI - M_PI_2;
-    NSTimeInterval interval = (startAngle - endAngle) * 3.0f;
-    if (interval < 0) {
-        interval = -interval;
-    }
-    NSLog(@"Start: %f, End: %f, interval: %f", startAngle, endAngle, interval);
-    if (interval > 0.5) {
-        interval = 0.5;
-    }
-    NSLog(@"Calculated duration: %f", interval);
-    return 0.8;
-    
-}
-*/
 
 -(void)reset{
     _currentProgress = 0;
     _progressBar.endAngle = -M_PI_2;
     _progressBar.startAngle = -M_PI_2;
-    self.progressLabel.text = @"0%";
+    _progressLabel.text = @"0%";
+}
+
+-(void)setLabelColor:(UIColor *)color{
+    _progressLabel.textColor = color;
+}
+-(void)setLabelAlignment:(NSTextAlignment)alignment{
+    _progressLabel.textAlignment = alignment;
+}
+-(void)setLabelFont:(UIFont *)font{
+    _progressLabel.font = font;
 }
 
 @end

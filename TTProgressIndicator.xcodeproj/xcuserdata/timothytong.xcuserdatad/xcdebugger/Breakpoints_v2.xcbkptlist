@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TTProgressIndicator/TTProgressBarLayer.m"
-            timestampString = "444025818.653909"
+            timestampString = "443926829.25324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "-actionForKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TTProgressIndicator/TTIndicatorView.m"
-            timestampString = "444025818.653909"
+            filePath = "TTProgressIndicator/TTProgressBarLayer.m"
+            timestampString = "443928187.178713"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-setCenterColor:withAnimationTime:"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "-generateAnimationForKey:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TTProgressIndicator/TTIndicatorView.m"
+            timestampString = "444027079.598964"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "-updateProgress:withAnimationDuration:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -11,12 +11,15 @@
 #import "TTProgressBarLayer.h"
 @interface TTIndicatorView : UIView
 @property(nonatomic, readwrite) BOOL showProgressValues;
-@property(strong, nonatomic)UILabel *progressLabel;
 
 
-- (void)updateProgress:(CGFloat)newProgress animationDuration:(CFTimeInterval)duration;
+
+- (void)updateProgress:(CGFloat)newProgress withAnimationDuration:(CFTimeInterval)duration;
 -(id)initWithFrame:(CGRect)frame strokeWidth:(CGFloat)barWidth;
 -(void)setBarColor:(UIColor *)color;
--(void)setCenterColor:(UIColor *)color withAnimationTime:(double)time;
+-(void)setCenterColor:(UIColor *)color withAnimationTime:(CFTimeInterval)time;
 -(void)reset;
+-(void)setLabelColor:(UIColor *)color;
+-(void)setLabelAlignment:(NSTextAlignment)alignment;
+-(void)setLabelFont:(UIFont *)font;
 @end
