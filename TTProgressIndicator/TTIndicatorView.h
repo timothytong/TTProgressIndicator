@@ -14,7 +14,7 @@
 @property(strong, nonatomic)UILabel *progressLabel;
 
 
-- (void)updateProgress:(CGFloat)newProgress;
+- (void)updateProgress:(CGFloat)newProgress animationDuration:(CFTimeInterval)duration;
 -(id)initWithFrame:(CGRect)frame strokeWidth:(CGFloat)barWidth;
 -(void)setBarColor:(UIColor *)color;
 -(void)setCenterColor:(UIColor *)color withAnimationTime:(double)time;

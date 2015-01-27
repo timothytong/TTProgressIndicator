@@ -51,32 +51,9 @@
     */
 
     [self delayWithSeconds:2 handler:^{
-        [self.indicator updateProgress:0.2];
+        [self.indicator updateProgress:0.2 animationDuration:4];
     }];
-    [self delayWithSeconds:4 handler:^{
-        [self.indicator updateProgress:0.4];
-    }];
-    [self delayWithSeconds:6 handler:^{
-        [self.indicator updateProgress:0.77];
-    }];
-    [self delayWithSeconds:8 handler:^{
-        [self.indicator updateProgress:0.89];
-    }];
-    [self delayWithSeconds:10 handler:^{
-        [self.indicator updateProgress:0.96];
-    }];
-    [self delayWithSeconds:12 handler:^{
-        [self.indicator updateProgress:1];
-    }];
-    [self delayWithSeconds:14 handler:^{
-        [self.indicator updateProgress:0.37];
-    }];
-    [self delayWithSeconds:16 handler:^{
-        [self.indicator updateProgress:1];
-    }];
-    [self delayWithSeconds:18 handler:^{
-        [self.indicator updateProgress:600];
-    }];
+
 /*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         

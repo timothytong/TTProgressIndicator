@@ -15,6 +15,7 @@
 @property (nonatomic) CGFloat startAngle;
 @property (nonatomic) CGColorRef strokeColor;
 @property (nonatomic) CGFloat strokeWidth;
+@property (nonatomic) CFTimeInterval dur;
 @property (nonatomic, readwrite) BOOL particlesEffect;
 -(void)setBarColor:(CGColorRef)color;
 @end
