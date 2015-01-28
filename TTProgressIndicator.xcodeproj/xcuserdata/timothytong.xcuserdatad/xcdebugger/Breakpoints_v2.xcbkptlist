@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TTProgressIndicator/TTIndicatorView.m"
-            timestampString = "444147754.367986"
+            timestampString = "444148842.811681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-setBarColor:"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "-setCenterColor:withAnimationTime:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TTProgressIndicator/ViewController.m"
-            timestampString = "444148290.047879"
+            timestampString = "444148842.811681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"

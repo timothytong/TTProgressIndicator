@@ -62,7 +62,6 @@
         [_centerCircle addSubview:_progressLabel];
         
         //Now get rid of the inner circle.
-
         CGRect bounds = _containerLayer.bounds;
         CAShapeLayer *innerCircleLayer = [CAShapeLayer layer];
         innerCircleLayer.frame = bounds;
