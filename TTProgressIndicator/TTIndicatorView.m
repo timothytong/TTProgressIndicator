@@ -38,11 +38,13 @@
         _containerLayer.backgroundColor = [UIColor clearColor].CGColor;
         
         _progressBar = [TTProgressBarLayer layer];
+        _progressBar.strokeColor = [UIColor blueColor].CGColor;
         _progressBar.frame = self.bounds;
         
         [_containerLayer addSublayer:_progressBar];
         
         [self.layer addSublayer:_containerLayer];
+        
         CAShapeLayer *mask = [CAShapeLayer layer];
         mask.path=[UIBezierPath bezierPathWithOvalInRect:CGRectMake(0,0, frame.size.width, frame.size.height)].CGPath;
 
@@ -59,6 +61,21 @@
         [self addSubview:_centerCircle];
         [_centerCircle addSubview:_progressLabel];
         
+        //Now get rid of the inner circle.
+
+        CGRect bounds = _containerLayer.bounds;
+        CAShapeLayer *innerCircleLayer = [CAShapeLayer layer];
+        innerCircleLayer.frame = bounds;
+        innerCircleLayer.fillColor = [UIColor colorWithWhite:0 alpha:1].CGColor;
+        
+        CGFloat smallCircleRadius = (frame.size.width - barWidth)/2;
+        CGRect smallCircleRect = CGRectMake(CGRectGetMidX(bounds) - smallCircleRadius, CGRectGetMidY(bounds) - smallCircleRadius, 2 * smallCircleRadius, 2 * smallCircleRadius);
+        UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:smallCircleRect];
+        [path appendPath:[UIBezierPath bezierPathWithRect:bounds]];
+        innerCircleLayer.path = path.CGPath;
+        innerCircleLayer.fillRule = kCAFillRuleEvenOdd;
+        
+        _containerLayer.mask = innerCircleLayer;
     }
     return self;
     
