@@ -21,8 +21,4 @@
 -(void)setBarColor:(UIColor *)color;
 -(void)setCenterColor:(UIColor *)color withAnimationTime:(CFTimeInterval)time;
 -(void)reset;
--(void)setLabelColor:(UIColor *)color;
--(void)setLabelAlignment:(NSTextAlignment)alignment;
--(void)setLabelFont:(UIFont *)font;
--(void)setShowProgressValues:(BOOL)showProgressValues;
 @end

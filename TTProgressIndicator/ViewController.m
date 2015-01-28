@@ -32,10 +32,6 @@
      [self.indicator updateProgress:0.9];
      */
     
-    [self delayWithSeconds:2 handler:^{
-        [self.indicator updateProgress:1 withAnimationDuration:2];
-        
-    }];
     
     /* Getters and Setters
      [self delayWithSeconds:4 handler:^{
