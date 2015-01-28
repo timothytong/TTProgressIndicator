@@ -16,10 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.indicator = [[TTIndicatorView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 120, self.view.frame.size.height/2 - 20, 40, 40) strokeWidth:2];
+    self.indicator = [[TTIndicatorView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 30, self.view.frame.size.height/2 - 30, 60, 60) strokeWidth:4];
     [self.view addSubview:self.indicator];
     [self.indicator reset];
-    self.view.backgroundColor = [UIColor yellowColor];
+
     //    self.view.backgroundColor = [UIColor colorWithRed:140.0/255.0 green:140.0/255.0 blue:140.0/255.0 alpha:1];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -38,7 +38,7 @@
         
     }];
     [self delayWithSeconds:4 handler:^{
-
+        self.indicator.barColor = [UIColor grayColor];
 //        self.indicator.showProgressValues = NO;
     }];
     

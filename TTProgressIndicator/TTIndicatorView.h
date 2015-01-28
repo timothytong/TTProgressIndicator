@@ -15,10 +15,10 @@
 @property(nonatomic, weak) UIColor *labelColor;
 @property(nonatomic) NSTextAlignment alignment;
 @property(nonatomic, weak) UIFont *labelFont;
+@property(nonatomic, weak) UIColor *barColor;
 
 - (void)updateProgress:(CGFloat)newProgress withAnimationDuration:(CFTimeInterval)duration;
 -(id)initWithFrame:(CGRect)frame strokeWidth:(CGFloat)barWidth;
--(void)setBarColor:(UIColor *)color;
 -(void)setCenterColor:(UIColor *)color withAnimationTime:(CFTimeInterval)time;
 -(void)reset;
 @end

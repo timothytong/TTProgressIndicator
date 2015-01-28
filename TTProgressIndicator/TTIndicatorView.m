@@ -176,7 +176,8 @@
 }
 
 -(void)setBarColor:(UIColor *)color{
-    [_progressBar setBarColor:color.CGColor];
+    _progressBar.strokeColor = color.CGColor;
+    [_progressBar setNeedsDisplay];
 }
 -(void)setCenterColor:(UIColor *)color withAnimationTime:(CFTimeInterval)time{
     NSLog(@"setting center color");

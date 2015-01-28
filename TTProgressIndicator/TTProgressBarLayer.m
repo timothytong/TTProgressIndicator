@@ -26,10 +26,7 @@
     }
     return self;
 }
--(void)setBarColor:(CGColorRef)color{
-    self.strokeColor = color;
-    [self setNeedsDisplay];
-}
+
 - (id)initWithLayer:(id)layer {
     if (self = [super initWithLayer:layer]) {
         if ([layer isKindOfClass:[TTProgressBarLayer class]]) {
