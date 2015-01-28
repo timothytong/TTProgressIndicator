@@ -61,6 +61,7 @@
         
     }
     return self;
+    
 }
 -(void)changeText{
     _count++;
@@ -180,5 +181,14 @@
     _centerCircle.layer.backgroundColor = centerCircleColor.CGColor;
 }
 
-
+#pragma mark getters
+-(UIColor *)labelColor{
+    return _progressLabel.textColor;
+}
+-(UIColor *)centerCircleColor{
+    return (__bridge UIColor*)(_centerCircle.layer.backgroundColor);
+}
+-(UIFont *)labelFont{
+    return _progressLabel.font;
+}
 @end
