@@ -53,6 +53,7 @@
 }
 
 -(void)drawInContext:(CGContextRef)ctx{
+//    self.contentsScale = 3.0f;
     CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     CGFloat radius = self.bounds.size.width / 2;
     CGContextBeginPath(ctx);

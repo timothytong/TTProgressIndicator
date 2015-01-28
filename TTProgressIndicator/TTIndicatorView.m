@@ -11,7 +11,7 @@
 @interface TTIndicatorView()
 @end
 @implementation TTIndicatorView{
-    @private
+@private
     TTProgressBarLayer *_progressBar;
     CGFloat _currentProgress;
     NSTimer *_timer;
@@ -34,25 +34,49 @@
         CGRect frame = CGRectMake(circleCenter.x - halfWidth, circleCenter.y - halfWidth, 2*halfWidth, 2*halfWidth);
         _centerCircle = [[UIView alloc]initWithFrame:frame];
         _containerLayer = [CAShapeLayer layer];
+        if ([_containerLayer respondsToSelector:@selector(setContentsScale:)]){
+            [_containerLayer setContentsScale:[[UIScreen mainScreen] scale]];
+        }
         _containerLayer.frame = self.bounds;
         _containerLayer.backgroundColor = [UIColor clearColor].CGColor;
-        
         _progressBar = [TTProgressBarLayer layer];
+<<<<<<< Updated upstream
+=======
+        _progressBar.strokeColor = [UIColor redColor].CGColor;
+>>>>>>> Stashed changes
         _progressBar.frame = self.bounds;
-        
+        if ([_progressBar respondsToSelector:@selector(setContentsScale:)]){
+            [_progressBar setContentsScale:[[UIScreen mainScreen] scale]];
+        }
         [_containerLayer addSublayer:_progressBar];
         
         [self.layer addSublayer:_containerLayer];
         CAShapeLayer *mask = [CAShapeLayer layer];
         mask.path=[UIBezierPath bezierPathWithOvalInRect:CGRectMake(0,0, frame.size.width, frame.size.height)].CGPath;
-
+        
         _centerCircle.layer.backgroundColor = [UIColor blackColor].CGColor;
         _centerCircle.layer.mask = mask;
         _progressLabel = [[UILabel alloc]initWithFrame:CGRectMake(_centerCircle.frame.size.width * 0.1, _centerCircle.frame.size.height * 0.1, _centerCircle.frame.size.width * 0.8, _centerCircle.frame.size.height * 0.8)];
         _progressLabel.numberOfLines = 1;
         _progressLabel.adjustsFontSizeToFitWidth = YES;
-        _progressLabel.font = [UIFont fontWithName:@"Avenir Next Condensed" size:80];
-        _progressLabel.minimumScaleFactor = 0.2;
+        CGFloat fontSize = 1;
+        while (YES) {
+            fontSize++;
+            NSLog(@"trying fontsize %f",fontSize);
+            NSString *string = @"100%";
+            CGRect labelRect = [string
+                                boundingRectWithSize:CGSizeMake(_progressLabel.frame.size.width, 0)
+                                options:NSStringDrawingUsesLineFragmentOrigin
+                                attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Avenir Next Condensed" size:fontSize]}
+                                context:nil];
+            NSLog(@"labelRect width: %f, frame width: %f", labelRect.size.width, _progressLabel.frame.size.width);
+            if (labelRect.size.width >= _progressLabel.frame.size.width * 0.95) {
+                break;
+            }
+        }
+        NSLog(@"CALCULATED FONT SIZE: %f", --fontSize);
+        _progressLabel.font = [UIFont fontWithName:@"Avenir Next Condensed" size:fontSize];
+        _progressLabel.minimumScaleFactor = 1;
         _progressLabel.text = @"0%";
         _progressLabel.textColor = [UIColor whiteColor];
         _progressLabel.textAlignment = NSTextAlignmentCenter;
@@ -63,6 +87,9 @@
         
         CGRect bounds = _containerLayer.bounds;
         CAShapeLayer *innerCircleLayer = [CAShapeLayer layer];
+        if ([innerCircleLayer respondsToSelector:@selector(setContentsScale:)]){
+            [innerCircleLayer setContentsScale:[[UIScreen mainScreen] scale]];
+        }
         innerCircleLayer.frame = bounds;
         innerCircleLayer.fillColor = [UIColor colorWithWhite:0 alpha:1].CGColor;
         
@@ -74,7 +101,10 @@
         innerCircleLayer.fillRule = kCAFillRuleEvenOdd;
         
         _containerLayer.mask = innerCircleLayer;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         
     }
     return self;
@@ -101,7 +131,7 @@
             [_timer invalidate];
         }
         else{
-            _progressLabel.text = [NSString stringWithFormat:@"%d%%", _tempCurProgress];    
+            _progressLabel.text = [NSString stringWithFormat:@"%d%%", _tempCurProgress];
         }
         
     }
@@ -140,11 +170,11 @@
         NSLog(@"===pause: %.4f",pause);
         
         _timer = [NSTimer scheduledTimerWithTimeInterval:pause
-                                                      target:self
-                                                    selector:@selector(changeText)
-                                                    userInfo:nil
-                                                     repeats:YES];
-         
+                                                  target:self
+                                                selector:@selector(changeText)
+                                                userInfo:nil
+                                                 repeats:YES];
+        
     }
     
     CGFloat newEndAngle = 2 * M_PI * newProgress - M_PI_2;
